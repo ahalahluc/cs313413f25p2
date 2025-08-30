@@ -7,16 +7,11 @@ TestList.java and TestIterator.java
 		Your answer here.
 
 TestList.java
-
 	testRemoveObject()
-
 		list.remove(5); // what does this method do?
-
-			Your answer here.
-
+			Answer: removes element at index 5 (77)
 		list.remove(Integer.valueOf(5)); // what does this one do?
-
-			Your answer here.
+			Answer: removes the first occurrence of value 5
 
 TestIterator.java
 	testRemove()
