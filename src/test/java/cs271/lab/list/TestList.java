@@ -1,15 +1,13 @@
 package cs271.lab.list;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class TestList {
 
@@ -41,9 +39,9 @@ public class TestList {
   public void testSizeNonEmpty() {
     // TODO fix the expected values in the assertions below
     list.add(77);
-    assertEquals(true, list.isEmpty());
-    assertEquals(0, list.size());
-    assertEquals(0, list.get(0).intValue());
+    assertEquals(false, list.isEmpty());
+    assertEquals(1, list.size());
+    assertEquals(77, list.get(0).intValue());
   }
 
   @Test
