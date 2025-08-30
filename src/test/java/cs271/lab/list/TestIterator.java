@@ -1,16 +1,13 @@
 package cs271.lab.list;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class TestIterator {
 
@@ -97,6 +94,13 @@ public class TestIterator {
     // TODO use an iterator and a while loop to compute the average (mean) of the values
     // (defined as the sum of the items divided by the number of items)
     // testNonempty shows how to use an iterator; use i.hasNext() in the while loop condition
+    
+    final var i = list.iterator();
+    while (i.hasNext()) {
+      sum += i.next();
+      n++;
+    }
+
     assertEquals(61.3, sum / n, 0.1);
     assertEquals(7, n);
   }
