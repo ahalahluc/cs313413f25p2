@@ -20,8 +20,8 @@ TestList.java
 
 TestIterator.java
 	testRemove()
-		i.remove(); // what happens if you use list.remove(77)?
-			Answer: I will get ConcurrentModificationException because the iterator expects to have full control over removals,
+		i.remove(); // What happens if you use list.remove(Integer.valueOf(77))
+			Answer: I will get ConcurrentModificationException error, because the iterator expects to have full control over removals,
 			the safest way is i.remove() which safely removes the last element returned by i.next()
 
 TestPerformance.java
