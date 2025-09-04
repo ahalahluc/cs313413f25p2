@@ -1,11 +1,12 @@
 package cs271.lab.list;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TestPerformance {
 
@@ -21,6 +22,14 @@ public class TestPerformance {
   // TODO choose this value in such a way that you can observe an actual effect
   // for increasing problem sizes
   private final int REPS = 1000000;
+
+  private void bench(String name, Runnable r) {
+    long t0 = System.nanoTime();
+    r.run();
+    long t1 = System.nanoTime();
+    double ms = (t1 - t0) / 1_000_000.0;
+    System.out.printf("%s: %.3f ms%n", name, ms);
+  }
 
   private List<Integer> arrayList;
 
@@ -44,33 +53,44 @@ public class TestPerformance {
 
   @Test
   public void testLinkedListAddRemove() {
-    for (var r = 0; r < REPS; r++) {
-      linkedList.add(0, 77);
-      linkedList.remove(0);
-    }
+    bench("testLinkedListAddRemove", () -> {
+      for (var r = 0; r < REPS; r++) {
+        linkedList.add(0, 77);
+        linkedList.remove(0);
+      }
+    });
   }
 
   @Test
   public void testArrayListAddRemove() {
-    for (var r = 0; r < REPS; r++) {
-      arrayList.add(0, 77);
-      arrayList.remove(0);
-    }
+    bench("testArrayListAddRemove", () -> {
+      for (var r = 0; r < REPS; r++) {
+        arrayList.add(0, 77);
+        arrayList.remove(0);
+      }
+    });
   }
 
   @Test
   public void testLinkedListAccess() {
-    var sum = 0L;
-    for (var r = 0; r < REPS; r++) {
-      sum += linkedList.get(r % SIZE);
-    }
+    bench("testLinkedListAccess", () -> {
+      long sum = 0L;
+      for (var r = 0; r < REPS; r++) {
+        sum += linkedList.get(r % SIZE);
+      }
+      if (sum == 42) System.out.print(""); // keep JIT honest
+    });
   }
 
   @Test
   public void testArrayListAccess() {
-    var sum = 0L;
-    for (var r = 0; r < REPS; r++) {
-      sum += arrayList.get(r % SIZE);
-    }
+    bench("testArrayListAccess", () -> {
+      long sum = 0L;
+      for (int r = 0; r < REPS; r++) {
+        sum += arrayList.get(r % SIZE);
+      }
+      // prevent JIT from discarding the loop
+      if (sum == 42) System.out.print("");
+    });
   }
 }
